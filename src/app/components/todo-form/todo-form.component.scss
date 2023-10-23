@@ -1,0 +1,36 @@
+@import '../../../styles.scss';
+
+.form {
+    margin-bottom: 40px;
+}
+
+.form-control {
+  @include form-control-styles;
+
+    label {
+        @include form-control-label;
+    }
+
+    input {
+        @include form-control-input;
+    }
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .form-control {
+        width: 145px;
+        margin-top: 0;
+    }
+}
+
+.btn {
+    @include button-styles;
+}
+
+.btn-block {
+    @include button-block;
+}

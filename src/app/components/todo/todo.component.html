@@ -1,0 +1,5 @@
+<app-todo-form (addTodo)="addTodo($event)"></app-todo-form>
+<div class="grid-btn"><fa-icon (click)="onChange()"  [icon]="showGrid ? faBars : faThLarge"></fa-icon></div>
+<div cdkDropList [ngClass]="{'todo-container': showGrid}" (cdkDropListDropped)="drop($event)">
+    <app-todo-item cdkDrag *ngFor="let todo of todos" [todo]="todo" (onDeleteTodo)="deleteTodo(todo)" (onComplete)="setCompleted(todo)"></app-todo-item>
+</div>

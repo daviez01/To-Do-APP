@@ -1,0 +1,36 @@
+{
+  "todos": [
+    {
+      "id": 2,
+      "title": "Learn Redux",
+      "text": "watch tutorials on youtube",
+      "day": "May 2nd 2023",
+      "time": "10:00am",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "title": "Learn React",
+      "text": "Take a Udemy course",
+      "day": "May 3rd 2023",
+      "time": "10:00am",
+      "completed": false
+    },
+    {
+      "title": "wash the car",
+      "text": "thorough washing with soap",
+      "day": "2023-10-13",
+      "time": "15:05",
+      "completed": true,
+      "id": 4
+    },
+    {
+      "title": "yuiop",
+      "text": "yuiop",
+      "day": "2023-10-04",
+      "time": "14:02",
+      "completed": true,
+      "id": 5
+    }
+  ]
+}

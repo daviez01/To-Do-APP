@@ -1,0 +1,10 @@
+@import '../../../styles.scss';
+
+.btn {
+    @include button-styles;
+  }
+
+.btn-block {
+    @include button-styles;
+    @include button-block;
+  }

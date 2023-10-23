@@ -1,0 +1,13 @@
+<div [ngClass]="{checked: todo.completed, grid: showGrid}" class="todo">
+    <h3>{{todo.title}} <fa-icon (click)="onDelete(todo)" [ngStyle]="{'color': 'red'}" [icon]="faTimes"></fa-icon></h3>
+    <div class="text-cont">
+        <p class="text">
+            {{todo.text}}
+        </p>
+        <div class="check">
+            <label for="done">Done</label>
+            <input type="checkbox" id="done" (change)="onDone(todo)" [checked]="todo.completed">
+        </div>
+    </div>
+    <p>{{todo.day}} at {{todo.time}}</p>
+</div>
