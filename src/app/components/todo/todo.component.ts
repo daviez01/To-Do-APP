@@ -117,8 +117,8 @@ export class TodoComponent {
     // Add the TodoLS object to the todos array.
     this.todos.push(todoLS);
 
-    // Store the tasks in local storage.
-    this.localStorageService.storeTasks(this.todos);
+  // Store the tasks in local storage.
+    this.storeTasks();
   }
 
 
