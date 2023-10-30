@@ -35,63 +35,49 @@ export class TodoComponent {
 
 
   ngOnInit(): void {
-    // Get the tasks from local storage.
-    const tasksJson = this.localStorageService.getTasks();
-  
-    // Convert the array of tasks to a string.
-    const tasksJsonString = JSON.stringify(tasksJson);
-  
-    // Deserialize the tasks from JSON.
-    const tasks = JSON.parse(tasksJsonString) as TodoLS[];
-  
-    // Assign the tasks to the todos array.
-    this.todos = tasks;
+    this.todos = this.getTasks();
   }
 
-  loadTasksFromLocalStorage() {
-    const storedTasksString = localStorage.getItem('todo');
-    if (storedTasksString !== null) {
-      const storedTasks = JSON.parse(storedTasksString);
-      this.todos = storedTasks;
-    } else {
-      this.todos = []; // or provide a default value if needed
-    }
-  }
 
   onChange() { 
     this.gridService.toggleChangeGrid();
   }
 
   //reasigning Ids based on index
-  reassignIDs(): void {
-    this.todos.forEach((todo, index) => {
-      todo.id = index + 1;
-    });
-    console.log(this.todos);
-  }
+  // reassignIDs(): void {
+  //   this.todos.forEach((todo, index) => {
+  //     todo.id = index + 1;
+  //   });
+  //   console.log(this.todos);
+  // }
 
 
   drop(event: CdkDragDrop<TodoLS[]>) {
     console.log(event);
     moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
-    this.reassignIDs();
-    this.updateTodo (this.todos);
+    // this.reassignIDs();
+    this.storeTasks(this.todos);
   }
 
   deleteTodo (todo: TodoLS) {
-    // this.todoService
-    //   .deleteTodo (todo)
-    //   .subscribe(
-    //     () => (this.todos = this.todos.filter((t) => t.id !== todo.id))
-    //   );
+    // Remove the todo from the todos array.
+    const todoIndex = this.todos.indexOf(todo);
+    if (todoIndex !== -1) {
+      this.todos.splice(todoIndex, 1);
+    }
+
+    // remove the tasks in local storage.
+    const todoJson = JSON.stringify(todo);
+    this.localStorageService.deleteTask(todoJson);      
   }
 
   setCompleted (todo: TodoLS) {
     todo.completed = !todo.completed;
-    // this.todoService.updateTodoCompleted(todo).subscribe();
+
+    this.storeTasks(this.todos);
   }
 
-  storeTasks(): void {
+  storeTasks(todos: TodoLS[]): void {
     // Convert the todos array to an array of JSON strings.
     const tasksJson: string[] = this.todos.map((todo) => JSON.stringify(todo));
   
@@ -118,19 +104,7 @@ export class TodoComponent {
     this.todos.push(todoLS);
 
   // Store the tasks in local storage.
-    this.storeTasks();
+    this.storeTasks(this.todos);
   }
-
-
-
-  updateTodo (todos: TodoLS[]) {
-    // this.todoService.updateTodo (todos).subscribe();
-
-    // Convert the array of TodoLS objects to an array of JSON strings.
-    const tasksJson: string[] = todos.map((todo) => JSON.stringify(todo))
-
-    this.localStorageService.storeTasks(tasksJson)
-  }
-
 
 }
